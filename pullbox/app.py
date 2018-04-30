@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
 from flask import Flask, render_template
+from sqlalchemy.exc import OperationalError
 
 from pullbox import commands, public, user
 from pullbox.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, webpack
@@ -76,9 +77,13 @@ def register_commands(app):
 
 
 def initialize_database(app):
+    """Initialize some objects in the database on first start."""
     with app.app_context():
-        if db.session.query(User).count() == 0:
-            admin = User(username="admin", email="")
-            admin.set_password("admin")
-            db.session.add(admin)
-            db.session.commit()
+        try:
+            if db.session.query(User).count() == 0:
+                admin = User(username='admin', email='')
+                admin.set_password('admin')
+                db.session.add(admin)
+                db.session.commit()
+        except OperationalError:
+            pass

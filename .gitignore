@@ -3,8 +3,9 @@
 # C extensions
 *.so
 
-# IDE Files
+# IDE/dev Files
 .idea
+dev.db
 
 # Packages
 *.egg

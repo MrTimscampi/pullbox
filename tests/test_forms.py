@@ -56,13 +56,3 @@ class TestLoginForm:
         form = LoginForm(username=user.username, password='wrongpassword')
         assert form.validate() is False
         assert 'Invalid password' in form.password.errors
-
-    def test_validate_inactive_user(self, user):
-        """Inactive user."""
-        user.active = False
-        user.set_password('example')
-        user.save()
-        # Correct username and password, but user is not activated
-        form = LoginForm(username=user.username, password='example')
-        assert form.validate() is False
-        assert 'User not activated' in form.username.errors

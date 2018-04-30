@@ -5,6 +5,7 @@ from flask import Flask, render_template
 from pullbox import commands, public, user
 from pullbox.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, webpack
 from pullbox.settings import ProdConfig
+from pullbox.user.models import User
 
 
 def create_app(config_object=ProdConfig):
@@ -19,6 +20,7 @@ def create_app(config_object=ProdConfig):
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+    initialize_database(app)
     return app
 
 
@@ -71,3 +73,12 @@ def register_commands(app):
     app.cli.add_command(commands.lint)
     app.cli.add_command(commands.clean)
     app.cli.add_command(commands.urls)
+
+
+def initialize_database(app):
+    with app.app_context():
+        if db.session.query(User).count() == 0:
+            admin = User(username="admin", email="")
+            admin.set_password("admin")
+            db.session.add(admin)
+            db.session.commit()

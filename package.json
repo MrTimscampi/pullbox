@@ -43,6 +43,7 @@
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "font-awesome-webpack": "0.0.5-beta.2",
+    "last-release-git": "0.0.3",
     "less": "^2.7.2",
     "less-loader": "^4.0.4",
     "manifest-revision-webpack-plugin": "^0.4.0",
@@ -62,7 +63,12 @@
   "release": {
     "branch": "master",
     "repositoryUrl": "https://github.com/MrTimscampi/pullbox.git",
-    "verifyConditions": ["@semantic-release/github"],
-    "publish": ["@semantic-release/github"]
+    "verifyConditions": [
+      "@semantic-release/github"
+    ],
+    "publish": [
+      "@semantic-release/github"
+    ],
+    "getLastRelease": "last-release-git"
   }
 }

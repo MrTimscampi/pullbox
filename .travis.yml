@@ -16,6 +16,9 @@ before_script:
   - npm run build
   - flask lint
 script: flask test
+after_success:
+  - git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+  - git fetch --tags
 deploy:
   provider: script
   skip_cleanup: true

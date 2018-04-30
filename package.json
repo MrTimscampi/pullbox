@@ -47,7 +47,9 @@
     "less-loader": "^4.0.4",
     "manifest-revision-webpack-plugin": "^0.4.0",
     "raw-loader": "^0.5.1",
+    "semantic-release": "^15.1.8",
     "style-loader": "^0.18.2",
+    "travis-deploy-once": "^5.0.0",
     "url-loader": "^0.5.9",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
@@ -56,5 +58,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "release": {
+    "branch": "master",
+    "repositoryUrl": "https://github.com/MrTimscampi/pullbox.git",
+    "verifyConditions": ["@semantic-release/github"],
+    "publish": ["@semantic-release/github"]
   }
 }

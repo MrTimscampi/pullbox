@@ -5,7 +5,6 @@ from flask_login import login_required, login_user, logout_user
 
 from pullbox.extensions import login_manager
 from pullbox.public.forms import LoginForm
-from pullbox.user.forms import RegisterForm
 from pullbox.user.models import User
 from pullbox.utils import flash_errors
 

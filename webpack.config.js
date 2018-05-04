@@ -22,8 +22,8 @@ module.exports = {
     main_js: './assets/js/main',
     main_css: [
       path.join(__dirname, 'node_modules', 'font-awesome', 'css', 'font-awesome.css'),
-      path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css', 'bootstrap.css'),
-      path.join(__dirname, 'assets', 'css', 'style.css'),
+      path.join(__dirname, 'node_modules', 'bootstrap', 'scss', 'bootstrap.scss'),
+      path.join(__dirname, 'assets', 'css', 'style.scss'),
     ],
   },
   output: {
@@ -48,6 +48,19 @@ module.exports = {
       { test: /\.(ttf|eot|svg|png|jpe?g|gif|ico)(\?.*)?$/i,
         loader: `file-loader?context=${rootAssetPath}&name=[path][name].[hash].[ext]` },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: { presets: ['env'], cacheDirectory: true } },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+            fallbackLoader: 'style-loader',
+            loader: [{
+              loader: 'css-loader', // translates CSS into CommonJS modules
+            }, {
+              loader: 'postcss-loader', // Run post css actions
+            }, {
+              loader: 'sass-loader' // compiles Sass to CSS
+            }]
+        })
+      },
     ],
   },
   plugins: [

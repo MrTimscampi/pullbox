@@ -3,9 +3,65 @@
    ========================================================================== */
 
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import "custom";
 @import "~bootstrap/scss/mixins";
 
 @import "~bootstrap/scss/bootstrap";
 
+.navbar-dark {
+  .navbar-brand {
+    color: $primary;
+  }
+  .form-control {
+    background-color: $gray-700;
+    color: $gray-200;
+    border-color: $gray-900;
+  }
+}
 
+.wrapper {
+  display: flex;
+  overflow: hidden;
+}
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  height: 100vh;
+  background-color: $gray-800;
+  padding-top: 55px;
+  position: sticky;
+  top: 0;
+
+  .sidebar-header {
+    padding-left: 20px;
+    background-color: $gray-700;
+
+    h3 {
+      line-height: 40px;
+      font-size: 14pt;
+      font-weight: $font-weight-light;
+      color: $gray-200;
+    }
+  }
+
+  ul {
+    li {
+      width: 100%;
+
+      a {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 10px;
+      }
+
+      .active {
+
+      }
+    }
+  }
+}
+
+#content {
+  padding-top: 55px;
+}
